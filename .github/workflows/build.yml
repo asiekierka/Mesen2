@@ -59,13 +59,9 @@ jobs:
       matrix:
         compiler: [gcc, clang, clang_aot]
         platform: [
-          {os: ubuntu-22.04, path: x64},
-          {os: ubuntu-22.04-arm, path: arm64}
+          {os: ubuntu-24.04, path: x64},
+          {os: ubuntu-24.04-arm, path: arm64}
         ]
-        exclude:
-          # ARM64 AOT build doesn't seem to work properly (crashes when launched)
-          - platform: { os: ubuntu-22.04-arm, path: arm64 }
-            compiler: clang_aot
         include:
           - compiler: gcc
             make_flags: "USE_GCC=true"
@@ -115,8 +111,8 @@ jobs:
       matrix:
         compiler: [clang_appimage]
         platform: [
-          {os: ubuntu-22.04, name: x64, script: Linux/appimage/appimage.sh},
-          {os: ubuntu-22.04-arm, name: ARM64, script: Linux/appimage/appimage-arm64.sh}
+          {os: ubuntu-24.04, name: x64, script: Linux/appimage/appimage.sh},
+          {os: ubuntu-24.04-arm, name: ARM64, script: Linux/appimage/appimage-arm64.sh}
         ]
     runs-on: ${{ matrix.platform.os }}
 
